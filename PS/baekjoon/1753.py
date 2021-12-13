@@ -1,10 +1,37 @@
 #다익스트라 알고리즘
+import heapq
+import sys
+input = sys.stdin.readline
+
 V,E = map(int,input().split())
-Start = int(input())
+INF = int(1e9)
+start = int(input())
+graph = [[] for _ in range(V+1)]
+distance = [INF]*(V+1)
 for _ in range(E):
     u,v,w = map(int,input().split())
+    graph[u].append([v,w])
 
+def dijkstra(start):
+    q = []
+    heapq.heappush(q,(0,start))
+    distance[start] = 0
 
-# i 번째 노드까지의 최단 경로값 출력
-# i 번이 자기자신일때는 0을 출력
-# 경로가 없을시 INF 출력
+    while q:
+        dist,now = heapq.heappop(q)
+
+        if distance[now]<dist:
+            continue
+        for i in graph[now]:
+            cost = dist+i[1]
+            if cost<distance[i[0]]:
+                distance[i[0]] = cost
+                heapq.heappush(q,(cost,i[0]))
+
+dijkstra(start)
+
+for i in range(1,V+1):
+    if distance[i] == INF:
+        print("INF")
+    else:
+        print(distance[i])
