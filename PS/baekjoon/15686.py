@@ -1,4 +1,28 @@
-#연구소랑 비슷한 문제
-#연구소가 벽을 세웟다면 여기서는
-#치킨집을 지우고 치킨거리를 구하면됨
-#잠오니까 내일풀어야지
+# 조합으로 풀어야 시간복잡도를 통과한다..
+
+
+from itertools import combinations
+
+n,m = map(int,input().split())
+houses = []
+shops = []
+for i in range(n):
+    for j,x in enumerate(list(map(int,input().split()))):
+        if x == 1:
+            houses.append((i,j))
+        elif x == 2:
+            shops.append((i,j))
+
+result = []
+for picked_shops in list(combinations(shops,m)):
+    chicken_dist = 0
+    for hy,hx in houses:
+        dists = []
+        for sy,sx in picked_shops:
+            dist = abs(hy-sy)+abs(hx-sx)
+            dists.append(dist)
+        chicken_dist += min(dists)
+    result.append(chicken_dist)
+
+print(min(result))
+        
