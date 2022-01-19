@@ -13,3 +13,4 @@ function solution(people, limit) {
     }
     return answer;
 }
+

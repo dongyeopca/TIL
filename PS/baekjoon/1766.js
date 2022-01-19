@@ -32,7 +32,7 @@ class MinHeap {
     };
     //
     pop(){
-        if(this.heap.length == 1){
+        if(this.heap.length === 1){
             return this.heap.pop();
         }
         const result = this.heap[0];
@@ -46,7 +46,6 @@ class MinHeap {
             this.swap(index,smallerIndex);
             index = smallerIndex;
         }
-
         return result;
     }
 }
